@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Stress Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-brand" id="navLogo">
+            <span class="brand-title">Multimodal Stress Detection</span>
+            <span class="brand-divider">/</span>
+            <span class="brand-subtitle">Real-Time Assessment</span>
+        </div>
+
+        <!-- Step Navigation Tabs -->
+        <div class="step-tabs">
+            <button class="step-tab" data-step="0" id="tabStep0">
+                <span class="step-num">00</span>
+                <span class="step-name">Welcome</span>
+            </button>
+            <span class="step-line"></span>
+            <button class="step-tab" data-step="1" id="tabStep1">
+                <span class="step-num">01</span>
+                <span class="step-name">Sensors</span>
+            </button>
+            <span class="step-line"></span>
+            <button class="step-tab" data-step="2" id="tabStep2">
+                <span class="step-num">02</span>
+                <span class="step-name">Camera</span>
+            </button>
+            <span class="step-line"></span>
+            <button class="step-tab" data-step="3" id="tabStep3">
+                <span class="step-num">03</span>
+                <span class="step-name">Assessment</span>
+            </button>
+        </div>
+
+        <div class="nav-actions">
+            <button id="btnOpenConfig" class="btn-text" title="Bluetooth Settings">Settings</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+        <!-- =============================================================== -->
+        <!-- SCREEN 0: WELCOME SCREEN                                        -->
+        <!-- =============================================================== -->
+        <section id="screen0" class="screen-view active">
+            <div class="welcome-card card">
+                <div class="welcome-badge">
+                    <span>Clinical & Research Grade Telemetry</span>
+                </div>
+                <h1>Multimodal Stress Detection</h1>
+                <p class="welcome-lead">
+                    A clean, professional physiological and facial dynamics platform. Pair your wearable Bluetooth sensors and enable camera access to conduct a calibrated 60-second stress evaluation.
+                </p>
+
+                <div class="welcome-features">
+                    <div class="welcome-feat">
+                        <strong>01 / Hardware Telemetry</strong>
+                        <p>Real-time streaming of Electrodermal Activity (GSR), Blood Volume Pulse (PPG), Temperature, and Accelerometer via Web Bluetooth.</p>
+                    </div>
+                    <div class="welcome-feat">
+                        <strong>02 / Facial Dynamics</strong>
+                        <p>Continuous extraction of facial rigidity, physical motion deltas, and postural leaning directly in-browser.</p>
+                    </div>
+                    <div class="welcome-feat">
+                        <strong>03 / 60-Second Evaluation</strong>
+                        <p>Combines sensor and visual streams across rolling 5-second windows to deliver an official multimodal diagnosis.</p>
+                    </div>
+                </div>
+
+                <div class="welcome-actions">
+                    <button class="btn btn-primary btn-lg btn-next" data-next="1">
+                        Begin Setup →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- SCREEN 1: SENSORS (NO SIMULATORS)                               -->
+        <!-- =============================================================== -->
+        <section id="screen1" class="screen-view">
+            <header class="screen-header">
+                <div class="header-content">
+                    <h1>Connect Bluetooth Sensors</h1>
+                    <p>Pair your Empatica E4 or custom ESP32 wearable sensor device over Bluetooth Low Energy (BLE) to begin streaming real-time physiological data.</p>
+                </div>
+                <div class="header-controls">
+                    <button id="btnConnectBLE" class="btn btn-primary btn-lg">
+                        Pair Bluetooth Device
+                    </button>
+                </div>
+            </header>
+
+            <!-- Status Banner -->
+            <div class="card status-banner" id="bleBanner">
+                <div class="banner-info">
+                    <span class="status-dot" id="bleDot"></span>
+                    <div>
+                        <strong id="bleStatusTitle">No Sensor Connected</strong>
+                        <p id="bleStatusDesc">Click "Pair Bluetooth Device" above to select your hardware from the browser pairing prompt.</p>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-sm" id="btnSkipBLE">Skip / Continue Offline →</button>
+            </div>
+
+            <!-- Sensor Names & Specifications List -->
+            <div class="sensors-specs-grid">
+                <div class="card spec-card">
+                    <div class="spec-head">
+                        <span class="spec-title">Electrodermal Activity (EDA / GSR)</span>
+                        <span id="liveValScreen1EDA" class="badge badge-normal" style="font-size: 14px; font-weight: 700;">-- µS</span>
+                    </div>
+                    <p class="spec-desc">Measures skin conductance response and sympathetic autonomic nervous system arousal.</p>
+                    <div class="spec-meta">
+                        <span>Unit: Micro-Siemens (µS)</span>
+                        <span>Sample Rate: 4 Hz</span>
+                    </div>
+                </div>
+
+                <div class="card spec-card">
+                    <div class="spec-head">
+                        <span class="spec-title">Blood Volume Pulse (PPG / HR)</span>
+                        <span id="liveValScreen1HR" class="badge badge-normal" style="font-size: 14px; font-weight: 700;">-- BPM</span>
+                    </div>
+                    <p class="spec-desc">Optical photoplethysmography waveform for real-time heart rate (BPM) and heart rate variability (HRV SDNN).</p>
+                    <div class="spec-meta">
+                        <span>Unit: Raw ADC / BPM</span>
+                        <span>Sample Rate: 64 Hz</span>
+                    </div>
+                </div>
+
+                <div class="card spec-card">
+                    <div class="spec-head">
+                        <span class="spec-title">Peripheral Skin Temperature</span>
+                        <span id="liveValScreen1TEMP" class="badge badge-normal" style="font-size: 14px; font-weight: 700;">-- °C</span>
+                    </div>
+                    <p class="spec-desc">Monitors thermal deviation and peripheral vasoconstriction during acute stress episodes.</p>
+                    <div class="spec-meta">
+                        <span>Unit: Celsius (°C)</span>
+                        <span>Sample Rate: 4 Hz</span>
+                    </div>
+                </div>
+
+                <div class="card spec-card">
+                    <div class="spec-head">
+                        <span class="spec-title">3-Axis Accelerometer (X, Y, Z)</span>
+                        <span id="liveValScreen1ACC" class="badge badge-normal" style="font-size: 14px; font-weight: 700;">-- g</span>
+                    </div>
+                    <p class="spec-desc">Measures physical movement to filter out physical activity from cognitive arousal.</p>
+                    <div class="spec-meta">
+                        <span>Unit: G-Force ($g$)</span>
+                        <span>Sample Rate: 32 Hz</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen Footer -->
+            <footer class="screen-footer">
+                <button class="btn btn-secondary btn-prev" data-prev="0">
+                    ← Back to Welcome
+                </button>
+                <button class="btn btn-primary btn-next" data-next="2">
+                    Continue to Camera Setup →
+                </button>
+            </footer>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- SCREEN 2: CAMERA & FACIAL FEATURES (NO SIMULATORS)              -->
+        <!-- =============================================================== -->
+        <section id="screen2" class="screen-view">
+            <header class="screen-header">
+                <div class="header-content">
+                    <h1>Camera & Facial Feature Connection</h1>
+                    <p>Enable camera access to capture live facial dynamics. All image processing occurs locally within your browser using HTML5 Canvas.</p>
+                </div>
+                <div class="header-controls">
+                    <button id="btnEnableCam" class="btn btn-primary btn-lg">
+                        Enable Camera Access
+                    </button>
+                </div>
+            </header>
+
+            <div class="camera-connect-layout">
+                <!-- Video Display -->
+                <div class="card video-container-card">
+                    <div class="video-preview-box">
+                        <video id="webcamVideo" autoplay playsinline muted></video>
+                        <canvas id="videoOverlayCanvas"></canvas>
+                        
+                        <div id="videoPlaceholder" class="video-placeholder">
+                            <span>Camera Currently Offline</span>
+                            <p>Click "Enable Camera Access" above to begin streaming real-time facial metrics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Specifications List -->
+                <div class="features-specs-list">
+                    <div class="card feature-info-card">
+                        <h3>Monitored Facial Features</h3>
+                        <p class="feat-subtitle">Continuous metrics computed across rolling 5-second windows:</p>
+
+                        <div class="feat-items">
+                            <div class="feat-item">
+                                <strong>Facial Rigidity (Laplacian Sharpness)</strong>
+                                <p>Measures local texture variance (`Laplacian variance`) across the facial region to detect localized muscle tension and rigidity.</p>
+                            </div>
+
+                            <div class="feat-item">
+                                <strong>Behavioral Motion (Frame Delta)</strong>
+                                <p>Calculates absolute pixel differences (`cv2.absdiff`) between consecutive frames to quantify physical agitation vs. sedentary calm.</p>
+                            </div>
+
+                            <div class="feat-item">
+                                <strong>Postural Leaning (Face Area Ratio)</strong>
+                                <p>Monitors bounding box area relative to the total frame to track forward leaning toward the screen during challenging tasks.</p>
+                            </div>
+
+                            <div class="feat-item">
+                                <strong>Gaze & Head Orientation</strong>
+                                <p>Tracks horizontal and vertical head center displacement (`face_center_x/y`) to detect nervous posture shifts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen Footer -->
+            <footer class="screen-footer">
+                <button class="btn btn-secondary btn-prev" data-prev="1">
+                    ← Back to Sensors
+                </button>
+                <button class="btn btn-primary btn-next" data-next="3">
+                    Continue to Assessment →
+                </button>
+            </footer>
+        </section>
+
+
+        <!-- =============================================================== -->
+        <!-- SCREEN 3: 60-SECOND STRESS ASSESSMENT (CLEAN & REAL)            -->
+        <!-- =============================================================== -->
+        <section id="screen3" class="screen-view">
+            <header class="screen-header">
+                <div class="header-content">
+                    <h1>60-Second Multimodal Stress Assessment</h1>
+                    <p>Conduct an official 60-second evaluation across 12 consecutive 5-second windows combining live hardware and camera streams.</p>
+                </div>
+                <div class="header-controls">
+                    <button id="btnLaunch60s" class="btn btn-primary btn-lg">
+                        Start 60s Assessment
+                    </button>
+                </div>
+            </header>
+
+            <!-- Test Banner -->
+            <div class="card test-status-card">
+                <div class="test-top">
+                    <div class="timer-clean">
+                        <span id="timerNumber" class="timer-digits">0s</span>
+                        <span class="timer-target">/ 60s</span>
+                    </div>
+                    <div class="test-state">
+                        <strong id="testStateTitle">Ready to Start</strong>
+                        <span id="testStateSub">Click "Start 60s Assessment" to begin window accumulation.</span>
+                    </div>
+                </div>
+                <div class="progress-clean-track">
+                    <div id="testProgressBar" class="progress-clean-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Real-time Summary Cards -->
+            <div class="assessment-data-grid">
+                <!-- Current Stream Status -->
+                <div class="card status-summary-card">
+                    <h3>Current Stream Status</h3>
+                    
+                    <div class="stream-rows">
+                        <div class="stream-row">
+                            <span>Bluetooth Sensor Telemetry</span>
+                            <strong id="liveSensorsStatus">Offline / Not Paired</strong>
+                        </div>
+                        <div class="stream-row">
+                            <span>Camera Facial Extraction</span>
+                            <strong id="liveCameraStatus">Offline / Not Enabled</strong>
+                        </div>
+                        <div class="stream-row">
+                            <span>Accumulated Windows</span>
+                            <strong id="liveWindowCount">0 / 12 windows</strong>
+                        </div>
+                    </div>
+
+                    <div class="stream-hint">
+                        <p>Note: If hardware is not connected, the system will record offline/zero-baseline windows during testing.</p>
+                    </div>
+                </div>
+
+                <!-- Live Stress Calculation -->
+                <div class="card live-calculation-card">
+                    <div class="calc-top">
+                        <span>Live Multimodal Stress Index</span>
+                        <span class="badge badge-subtle">Real-Time Fusion Engine</span>
+                    </div>
+
+                    <div class="score-clean-display">
+                        <span id="stressPercentText" class="clean-num">--%</span>
+                        <span id="stressClassification" class="badge badge-normal">Click Start to Begin Assessment</span>
+                    </div>
+
+                    <div class="score-clean-track">
+                        <div id="mainStressBar" class="score-clean-fill" style="width: 0%"></div>
+                    </div>
+
+                    <div class="mod-clean-rows">
+                        <div class="mod-clean-row">
+                            <span>Physiological Sensor Contribution</span>
+                            <strong id="valPPhys">--%</strong>
+                        </div>
+                        <div class="mod-clean-row">
+                            <span>Facial & Behavioral Contribution</span>
+                            <strong id="valPVis">--%</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Camera & Facial Feature View (Screen 3) -->
+                <div class="card live-camera-card">
+                    <div class="feed-header">
+                        <h3>Live Camera & Facial Stream</h3>
+                        <span class="badge badge-subtle">Local Canvas Extraction</span>
+                    </div>
+
+                    <div class="rt-camera-wrap">
+                        <canvas id="screen3CameraCanvas"></canvas>
+                        <div id="screen3CameraPlaceholder" class="video-placeholder">
+                            <span>Camera Offline</span>
+                            <p style="font-size: 0.78rem;">Enable camera in Step 2 to view live feed.</p>
+                        </div>
+                    </div>
+
+                    <!-- Live Facial Metrics Bar -->
+                    <div class="rt-facial-bar">
+                        <span>Visual Dynamics:</span>
+                        <div class="rt-facial-stats">
+                            <span>Sharpness: <strong id="valScreen3Sharp">0.0</strong></span>
+                            <span>Motion: <strong id="valScreen3Motion">0.0</strong></span>
+                            <span>Leaning: <strong id="valScreen3Area">0.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-Time Hardware Stream (Screen 3) -->
+                <div class="card realtime-feed-card">
+                    <div class="feed-header">
+                        <h3>Real-Time Hardware Traces</h3>
+                        <span class="badge badge-subtle">Live 60 FPS</span>
+                    </div>
+
+                    <div class="realtime-charts-grid">
+                        <!-- EDA -->
+                        <div class="rt-chart-box">
+                            <div class="rt-box-top">
+                                <span>Electrodermal (EDA)</span>
+                                <strong id="valScreen3EDA" class="rt-val">0.00 µS</strong>
+                            </div>
+                            <div class="rt-canvas-wrap">
+                                <canvas id="canvasScreen3EDA"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- PPG / HR -->
+                        <div class="rt-chart-box">
+                            <div class="rt-box-top">
+                                <span>Heart Rate (PPG)</span>
+                                <strong id="valScreen3HR" class="rt-val">0 BPM</strong>
+                            </div>
+                            <div class="rt-canvas-wrap">
+                                <canvas id="canvasScreen3BVP"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Temperature -->
+                        <div class="rt-chart-box">
+                            <div class="rt-box-top">
+                                <span>Skin Temperature</span>
+                                <strong id="valScreen3TEMP" class="rt-val">0.0 °C</strong>
+                            </div>
+                            <div class="rt-canvas-wrap">
+                                <canvas id="canvasScreen3TEMP"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Accelerometer -->
+                        <div class="rt-chart-box">
+                            <div class="rt-box-top">
+                                <span>Accelerometer Motion</span>
+                                <span id="valScreen3ACC" class="badge badge-calm">Calm</span>
+                            </div>
+                            <div class="rt-canvas-wrap">
+                                <canvas id="canvasScreen3ACC"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12-Window Buffer Visual Grid -->
+                <div class="card buffer-grid-card">
+                    <div class="buffer-grid-head">
+                        <span>60-Second Buffer Accumulation (12 Windows)</span>
+                        <span id="bufferCountText">0 / 12 windows</span>
+                    </div>
+                    <div id="bufferSlotsGrid" class="buffer-clean-grid">
+                        <!-- 12 slots appended by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen Footer -->
+            <footer class="screen-footer">
+                <button class="btn btn-secondary btn-prev" data-prev="2">
+                    ← Back to Camera
+                </button>
+                <div class="export-actions">
+                    <button id="btnToggleRecord" class="btn btn-outline">
+                        Record Session Telemetry
+                    </button>
+                    <button id="btnExportCSV" class="btn btn-secondary" disabled>
+                        Export CSV Data
+                    </button>
+                </div>
+            </footer>
+        </section>
+
+    </main>
+
+    <!-- ==================================================================== -->
+    <!-- MODAL 1: BLUETOOTH UUID SETTINGS                                      -->
+    <!-- ==================================================================== -->
+    <div id="modalConfig" class="modal-overlay hidden">
+        <div class="modal-box card">
+            <div class="modal-head">
+                <h3>Bluetooth UUID Configuration</h3>
+                <button id="btnCloseConfig" class="btn-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Configure custom ESP32 GATT Service and Characteristic UUIDs.</p>
+                <div class="form-row">
+                    <label>Service UUID</label>
+                    <input type="text" id="inputServiceUUID" class="clean-input">
+                </div>
+                <div class="form-row">
+                    <label>EDA Characteristic UUID</label>
+                    <input type="text" id="inputEDAUUID" class="clean-input">
+                </div>
+                <div class="form-row">
+                    <label>PPG Characteristic UUID</label>
+                    <input type="text" id="inputPPGUUID" class="clean-input">
+                </div>
+                <div class="form-row">
+                    <label>Temperature Characteristic UUID</label>
+                    <input type="text" id="inputTEMPUUID" class="clean-input">
+                </div>
+                <div class="form-row">
+                    <label>Accelerometer Characteristic UUID</label>
+                    <input type="text" id="inputACCUUID" class="clean-input">
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button id="btnResetUUIDs" class="btn btn-outline">Reset Defaults</button>
+                <button id="btnSaveUUIDs" class="btn btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- MODAL 2: OFFICIAL 60-SECOND ASSESSMENT RESULT                         -->
+    <!-- ==================================================================== -->
+    <div id="modal60sResult" class="modal-overlay hidden">
+        <div class="modal-box result-box card">
+            <div class="result-head">
+                <span class="badge badge-normal">Assessment Complete (60 Seconds)</span>
+                <h2>Official Stress Evaluation</h2>
+            </div>
+            
+            <div class="result-body">
+                <div class="result-score-main">
+                    <span id="revealScoreNum" class="result-big-num">0%</span>
+                    <span id="revealScoreTag" class="badge badge-calm">LOW STRESS</span>
+                </div>
+                <p id="revealExplanation" class="result-desc">
+                    Over the 60-second horizon (12 windows), physical and visual telemetry remained relaxed, indicating Low Stress.
+                </p>
+
+                <div class="result-grid">
+                    <div class="res-item">
+                        <span>Physiological Sensor Score</span>
+                        <strong id="revPhysioScore">0.0%</strong>
+                    </div>
+                    <div class="res-item">
+                        <span>Facial & Behavioral Score</span>
+                        <strong id="revVisualScore">0.0%</strong>
+                    </div>
+                    <div class="res-item">
+                        <span>Unified Multimodal Score</span>
+                        <strong id="revModel6A">0.0%</strong>
+                    </div>
+                    <div class="res-item">
+                        <span>Fusion Gating Balance</span>
+                        <strong id="revAlphaWeight">50.0%</strong>
+                    </div>
+                </div>
+
+                <div class="session-sensor-averages">
+                    <h4>Recorded 60s Session Hardware Averages</h4>
+                    <div class="session-avg-grid">
+                        <div><span>Mean EDA</span><strong id="revAvgEDA">0.00 µS</strong></div>
+                        <div><span>Mean Heart Rate</span><strong id="revAvgHR">0 BPM</strong></div>
+                        <div><span>Mean Skin Temp</span><strong id="revAvgTemp">0.0 °C</strong></div>
+                        <div><span>Mean Rigidity</span><strong id="revAvgSharp">0.0</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-foot">
+                <button id="btnCloseReveal" class="btn btn-primary btn-lg">Done & Return to Assessment</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

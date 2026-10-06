@@ -1,0 +1,220 @@
+{
+  "model_4_physio": {
+    "accuracy": 0.7424167081054202,
+    "f1": 0.13666666666666666,
+    "precision": 0.11549295774647887,
+    "recall": 0.1673469387755102,
+    "roc_auc": 0.435673839184598
+  },
+  "model_5a_visual": {
+    "accuracy": 0.809050223769269,
+    "f1": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "roc_auc": 0.30421799523886567
+  },
+  "model_6a_late_fusion": {
+    "accuracy": 0.8060666335156639,
+    "f1": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "roc_auc": 0.30916865047264663
+  },
+  "model_6b_inter_fusion": {
+    "accuracy": 0.8110392839383391,
+    "f1": 0.05,
+    "precision": 0.06451612903225806,
+    "recall": 0.04081632653061224,
+    "roc_auc": 0.3955023458987219
+  },
+  "mean_subject_accuracies": {
+    "physio_m4": 0.7396814847196344,
+    "visual_m5a": 0.8076533437124129,
+    "late_fusion_m6a": 0.8045716432555851,
+    "inter_fusion_m6b": 0.8095059563925968
+  },
+  "per_subject": [
+    {
+      "subject": 4,
+      "n_test": 125,
+      "n_stressed": 17,
+      "acc_physio_m4": 0.816,
+      "acc_visual_m5a": 0.864,
+      "acc_late_m6a": 0.864,
+      "acc_inter_m6b": 0.864,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 5,
+      "n_test": 113,
+      "n_stressed": 6,
+      "acc_physio_m4": 0.911504424778761,
+      "acc_visual_m5a": 0.9469026548672567,
+      "acc_late_m6a": 0.9469026548672567,
+      "acc_inter_m6b": 0.9469026548672567,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 8,
+      "n_test": 109,
+      "n_stressed": 9,
+      "acc_physio_m4": 0.48623853211009177,
+      "acc_visual_m5a": 0.8623853211009175,
+      "acc_late_m6a": 0.8623853211009175,
+      "acc_inter_m6b": 0.6788990825688074,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 9,
+      "n_test": 111,
+      "n_stressed": 4,
+      "acc_physio_m4": 0.26126126126126126,
+      "acc_visual_m5a": 0.963963963963964,
+      "acc_late_m6a": 0.963963963963964,
+      "acc_inter_m6b": 0.36936936936936937,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 10,
+      "n_test": 109,
+      "n_stressed": 35,
+      "acc_physio_m4": 0.44954128440366975,
+      "acc_visual_m5a": 0.6238532110091743,
+      "acc_late_m6a": 0.6146788990825688,
+      "acc_inter_m6b": 0.5871559633027523,
+      "best_alpha": 0.07
+    },
+    {
+      "subject": 13,
+      "n_test": 110,
+      "n_stressed": 19,
+      "acc_physio_m4": 0.8545454545454545,
+      "acc_visual_m5a": 0.8181818181818182,
+      "acc_late_m6a": 0.8181818181818182,
+      "acc_inter_m6b": 0.8181818181818182,
+      "best_alpha": 0.01
+    },
+    {
+      "subject": 15,
+      "n_test": 110,
+      "n_stressed": 22,
+      "acc_physio_m4": 0.4818181818181818,
+      "acc_visual_m5a": 0.8,
+      "acc_late_m6a": 0.8,
+      "acc_inter_m6b": 0.6636363636363637,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 19,
+      "n_test": 112,
+      "n_stressed": 0,
+      "acc_physio_m4": 1.0,
+      "acc_visual_m5a": 0.8660714285714286,
+      "acc_late_m6a": 0.8660714285714286,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 20,
+      "n_test": 112,
+      "n_stressed": 21,
+      "acc_physio_m4": 0.75,
+      "acc_visual_m5a": 0.8125,
+      "acc_late_m6a": 0.8125,
+      "acc_inter_m6b": 0.8125,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 21,
+      "n_test": 108,
+      "n_stressed": 0,
+      "acc_physio_m4": 0.5092592592592593,
+      "acc_visual_m5a": 0.9537037037037037,
+      "acc_late_m6a": 0.9074074074074074,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.09
+    },
+    {
+      "subject": 22,
+      "n_test": 109,
+      "n_stressed": 37,
+      "acc_physio_m4": 0.6605504587155964,
+      "acc_visual_m5a": 0.6605504587155964,
+      "acc_late_m6a": 0.6605504587155964,
+      "acc_inter_m6b": 0.6605504587155964,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 23,
+      "n_test": 110,
+      "n_stressed": 45,
+      "acc_physio_m4": 0.5909090909090909,
+      "acc_visual_m5a": 0.5909090909090909,
+      "acc_late_m6a": 0.5909090909090909,
+      "acc_inter_m6b": 0.5909090909090909,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 24,
+      "n_test": 110,
+      "n_stressed": 0,
+      "acc_physio_m4": 1.0,
+      "acc_visual_m5a": 0.8909090909090909,
+      "acc_late_m6a": 0.8909090909090909,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 25,
+      "n_test": 113,
+      "n_stressed": 0,
+      "acc_physio_m4": 1.0,
+      "acc_visual_m5a": 0.8230088495575221,
+      "acc_late_m6a": 0.8230088495575221,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 26,
+      "n_test": 113,
+      "n_stressed": 26,
+      "acc_physio_m4": 0.7699115044247787,
+      "acc_visual_m5a": 0.7699115044247787,
+      "acc_late_m6a": 0.7699115044247787,
+      "acc_inter_m6b": 0.7699115044247787,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 29,
+      "n_test": 110,
+      "n_stressed": 0,
+      "acc_physio_m4": 1.0,
+      "acc_visual_m5a": 0.32727272727272727,
+      "acc_late_m6a": 0.32727272727272727,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.0
+    },
+    {
+      "subject": 30,
+      "n_test": 110,
+      "n_stressed": 4,
+      "acc_physio_m4": 0.7727272727272727,
+      "acc_visual_m5a": 0.9636363636363636,
+      "acc_late_m6a": 0.9636363636363636,
+      "acc_inter_m6b": 0.8090909090909091,
+      "best_alpha": 0.01
+    },
+    {
+      "subject": 31,
+      "n_test": 117,
+      "n_stressed": 0,
+      "acc_physio_m4": 1.0,
+      "acc_visual_m5a": 1.0,
+      "acc_late_m6a": 1.0,
+      "acc_inter_m6b": 1.0,
+      "best_alpha": 0.0
+    }
+  ],
+  "total_samples": 2011,
+  "total_stressed": 245
+}

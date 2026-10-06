@@ -1,0 +1,45 @@
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments
+.venv/
+venv/
+env/
+ENV/
+
+# Secrets and machine-local settings
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Raw/private datasets and exported sessions
+DATASET/
+dataset/
+datasets/
+data/
+*.csv
+!*/outputs/results.json
+
+# Large or generated ML artifacts if added later
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.joblib
+*.onnx
+
+# Optional frontend/tooling artifacts
+node_modules/
+dist/
+build/
